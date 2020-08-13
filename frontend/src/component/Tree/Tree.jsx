@@ -4,9 +4,10 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 
-export default function Tree() {
+const Tree = () => {
+    let nodeId = 0;
 
-    const list = {
+    const data = {
         movie: {
             name: 'movie',
             child: [
@@ -60,25 +61,25 @@ export default function Tree() {
 
         }
     };
-    let nodeId = 0;
 
-    const createList = (data) => {
+
+    const createList = (contents) => {
         return (
             <>
                 <TreeView
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
                 >
-                    <TreeItem nodeId={nodeId++} label={data.name} >
+                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={contents.name} >
                         {
-                            data.child.map((
+                            contents.child.map((
                                 (item) =>
-                                    <TreeItem nodeId={nodeId++} label={item.name}>
+                                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={item.name}>
                                         {
                                             item.child ? 
                                             item.child.map((
                                                 (item) =>
-                                                    <TreeItem nodeId={nodeId++} label={item.name}>
+                                                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={item.name}>
                                                     </TreeItem>
                                             )) : null
                                         }
@@ -94,10 +95,12 @@ export default function Tree() {
 
     return (
         <>
-            { createList(list.movie) }
-            { createList(list.veriety) }
-            { createList(list.comix) }
+            { createList(data.movie) }
+            { createList(data.veriety) }
+            { createList(data.comix) }
         </>
     )
 
 }
+
+export default Tree;
