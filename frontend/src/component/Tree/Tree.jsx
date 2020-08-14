@@ -7,85 +7,45 @@ import TreeItem from '@material-ui/lab/TreeItem';
 const Tree = () => {
     let nodeId = 0;
 
-    const data = {
-        movie: {
-            name: 'movie',
-            child: [
-                {
-                    name: '2020',
-                    child: [
-                        {
-                            name: '살아있다 _2020'
-                        },
-                        {   
-                            name: '닥터 두리틀 _2020'
-                        }
-                    ]
-                },
-                {
-                    name: '[시리즈]마블'
-                }
-            ]
-        },
-        veriety: {
-            name: 'veriety',
-            child: [
-                {
-                    name: '무한도전'
-                },
-                {
-                    name: '런닝맨'
-                }                
-            ]
-        },
-        comix: {
-            name: 'comix',
-            child: [
-                {
-                    name: '완',
-                    child: [
-                        {
-                            name: '[~72]나루토'
-                        }
-                    ]
-                },
-                {
-                    name: '미완',
-                    child: [
-                        {
-                            name: '[~89]원피스'
-                        }
-                    ]
-                }            
-            ]
-
+    const data = [
+        {
+           dirName:"movie",
+           dirPath:"d:/directory/movie",
+           child:[
+              {
+                 dirName:"2020",
+                 dirPath:"d:\\directory\\movie\\2020",
+                 child:[
+                    {
+                       dirName:"살아있다 _2020",
+                       dirPath:"d:\\directory\\movie\\2020\\살아있다 _2020",
+                       child:[
+     
+                       ]
+                    }
+                 ]
+              },
+              {
+                 dirName:"[시리즈]마블",
+                 dirPath:"d:\\directory\\movie\\[시리즈]마블",
+                 child:[
+     
+                 ]
+              }
+           ]
         }
-    };
+    ];
 
-
-    const createList = (contents) => {
+    const createItem = (contents) => {
         return (
             <>
                 <TreeView
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
                 >
-                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={contents.name} >
+                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={contents.dirName} >
                         {
-                            contents.child.map((
-                                (item) =>
-                                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={item.name}>
-                                        {
-                                            item.child ? 
-                                            item.child.map((
-                                                (item) =>
-                                                    <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={item.name}>
-                                                    </TreeItem>
-                                            )) : null
-                                        }
-                                    </TreeItem>
-                                )
-                            )
+                            createItems(contents)
                         }
                     </TreeItem>
                 </TreeView>
@@ -93,11 +53,28 @@ const Tree = () => {
         )
     }
 
+    const createItems = (vo) => {
+        return (
+            <>
+                {
+                    vo.child ? 
+                    vo.child.map((
+                        (item) =>
+                            <TreeItem key={nodeId} nodeId={(nodeId++).toString()} label={item.dirName}>
+                                {
+                                    createItems(item)
+                                }
+                            </TreeItem>
+                        )
+                    ) : <></>
+                }
+            </>
+        )
+    }
+
     return (
         <>
-            { createList(data.movie) }
-            { createList(data.veriety) }
-            { createList(data.comix) }
+            { data.map((item) => createItem(item)) }
         </>
     )
 
