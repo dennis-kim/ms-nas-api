@@ -96,7 +96,7 @@ public class DirectoryServiceImpl implements DirectoryService{
         String updateDate = simpleDateFormat.format(lastModifiedDate);
         return updateDate;
     }
-
+  
     /**
      * 대상 디렉토리 인지 체크
      * exceptDirectories 항목에 있는 디렉토리는 표시하지 않음.
