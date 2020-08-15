@@ -13,7 +13,7 @@ const Tree = () => {
     let nodeId = 0;
 
     useEffect( () => {
-        console.log(getDirectories());
+        getDirectories();
     }, [])
 
     const getDirectories = () => {
@@ -29,7 +29,6 @@ const Tree = () => {
         Axios.get("/directories")
         .then(response => {
             // response.status 200
-            console.log(response)
             setData(response.data)
         })
         .catch(error => {

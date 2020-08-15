@@ -6,6 +6,7 @@ public class DirectoryVO {
 
     private String dirName;
     private String dirPath;
+    private String updateDate;
     private List<DirectoryVO> child;
 
     public String getDirName() {
@@ -30,5 +31,13 @@ public class DirectoryVO {
 
     public void setChild(List<DirectoryVO> child) {
         this.child = child;
+    }
+
+    public String getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(String updateDate) {
+        this.updateDate = updateDate;
     }
 }
