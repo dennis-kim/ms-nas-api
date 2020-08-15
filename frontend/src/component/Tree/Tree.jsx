@@ -1,40 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
+import api from '../../api/directoryApi';
+import Axios from 'axios';
+import { useState } from 'react';
 
 const Tree = () => {
+    const [data, setData] = useState([]);
+
     let nodeId = 0;
 
-    const data = [
-        {
-           dirName:"movie",
-           dirPath:"d:/directory/movie",
-           child:[
-              {
-                 dirName:"2020",
-                 dirPath:"d:\\directory\\movie\\2020",
-                 child:[
-                    {
-                       dirName:"살아있다 _2020",
-                       dirPath:"d:\\directory\\movie\\2020\\살아있다 _2020",
-                       child:[
-     
-                       ]
-                    }
-                 ]
-              },
-              {
-                 dirName:"[시리즈]마블",
-                 dirPath:"d:\\directory\\movie\\[시리즈]마블",
-                 child:[
-     
-                 ]
-              }
-           ]
+    useEffect( () => {
+        console.log(getDirectories());
+    }, [])
+
+    const getDirectories = () => {
+        const config = {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+                'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
+            }
         }
-    ];
+        const data = '';
+
+        Axios.get("/directories")
+        .then(response => {
+            // response.status 200
+            console.log(response)
+            setData(response.data)
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
     const createItem = (contents) => {
         return (
