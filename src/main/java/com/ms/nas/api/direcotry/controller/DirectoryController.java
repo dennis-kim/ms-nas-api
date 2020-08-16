@@ -18,4 +18,9 @@ public class DirectoryController {
     public List<DirectoryVO> getDirectories() {
         return directoryService.getDirectories();
     }
+
+    @GetMapping("/contents")
+    public List<DirectoryVO> getContentsList() {
+        return directoryService.getContents();
+    }
 }

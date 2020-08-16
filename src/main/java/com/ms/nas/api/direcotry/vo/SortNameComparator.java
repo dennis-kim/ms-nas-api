@@ -2,7 +2,7 @@ package com.ms.nas.api.direcotry.vo;
 
 import java.util.Comparator;
 
-public class VoComparator implements Comparator {
+public class SortNameComparator implements Comparator {
 
     @Override
     public int compare(Object o1, Object o2) {

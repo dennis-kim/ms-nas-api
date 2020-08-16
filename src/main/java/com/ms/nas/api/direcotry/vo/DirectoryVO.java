@@ -7,6 +7,7 @@ public class DirectoryVO {
     private String dirName;
     private String dirPath;
     private String updateDate;
+    private int depth;
     private List<DirectoryVO> child;
 
     public String getDirName() {
@@ -39,5 +40,13 @@ public class DirectoryVO {
 
     public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public int getDepth() {
+        return depth;
+    }
+
+    public void setDepth(int depth) {
+        this.depth = depth;
     }
 }
