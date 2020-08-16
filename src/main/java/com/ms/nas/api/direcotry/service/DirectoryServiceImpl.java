@@ -1,16 +1,15 @@
 package com.ms.nas.api.direcotry.service;
 
 import com.ms.nas.api.direcotry.vo.DirectoryVO;
+import com.ms.nas.api.direcotry.vo.VoComparator;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
-public class DirectoryServiceImpl implements DirectoryService{
+public class DirectoryServiceImpl implements DirectoryService, Comparator {
 
     //private final String BASE_PATH1 = "d:/directory/";// volume 위치가 될곳
     //private final String BASE_PATH2 = "d:/directory/";// volume 위치가 될곳
@@ -50,6 +49,15 @@ public class DirectoryServiceImpl implements DirectoryService{
         return list;
     }
 
+    @Override
+    public int compare(Object o1, Object o2) {
+        String name1 = ((DirectoryVO)o1).getDirName();
+        String name2 = ((DirectoryVO)o2).getDirName();
+
+
+        return name2.compareTo(name1);
+    }
+
     private DirectoryVO getUnderDirectories(String path) {
         return this.getDirectoryVO(path);
     }
@@ -79,10 +87,12 @@ public class DirectoryServiceImpl implements DirectoryService{
                     vo.setDirPath(child.getPath());
                     vo.setUpdateDate(getUpdateDate(child.lastModified()));
                     vo.setChild(getChild(child));
+                    Collections.sort(vo.getChild(), new VoComparator());
                     childVO.add(vo);
                 }
             }
         }
+        Collections.sort(childVO, new VoComparator());
         return childVO;
     }
 
