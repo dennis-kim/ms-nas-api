@@ -15,11 +15,11 @@ public class DirectoryServiceImpl implements DirectoryService {
     private final String pattern = "yyyy-MM-dd hh:mm aa";
     private SimpleDateFormat simpleDateFormat;
 
-    private final String BASE_PATH1 = "d:/directory/";// volume 위치가 될곳
-    private final String BASE_PATH2 = "d:/directory/";// volume 위치가 될곳
+//    private final String BASE_PATH1 = "d:/directory/";// volume 위치가 될곳
+//    private final String BASE_PATH2 = "d:/directory/";// volume 위치가 될곳
 
-    //private final String BASE_PATH1 = "/volume1/";// volume 위치가 될곳
-    //private final String BASE_PATH2 = "/volume2/";// volume 위치가 될곳
+    private final String BASE_PATH1 = "/volume1/";// volume 위치가 될곳
+    private final String BASE_PATH2 = "/volume2/";// volume 위치가 될곳
 
     private final String COMIX = BASE_PATH1 + "만화책";
     private final String DRAMA = BASE_PATH1 + "drama";
