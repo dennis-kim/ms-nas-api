@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import MaterialList from "@material-ui/core/List";
 import ListItem from './ListRow';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,39 +15,50 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-  const items = [
-      {
-        itemName: '살아있다 _2020',
-        updateDate: '2020.08.08 12:00:00',
-        directoryLocation: 'movie/2020'
-      },
-      {
-        itemName: '무한도전',
-        updateDate: '2020.07.01 12:00:00',
-        directoryLocation: '예능'
-      }
-  ]
-  
+
+const List = () => {
+  const classes = useStyles();
+  const [data, setData] = useState([]);
+
+  useEffect( () => {
+      getContents();
+    }, [])  
+    
+  const getContents = () => {
+    const config = {
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
+        }
+    }
+
+    Axios.get("/contents")
+    .then(response => {
+        // response.status 200
+        setData(response.data)
+    })
+    .catch(error => {
+        console.log(error);
+    })
+  }
+    
+    
   const createItems = () => {
     return(
-      items.map(
+      data.map(
         (item, i) =>  <ListItem key={i} item={item} isUnderLine={true}/>
       )
     )
   }
 
-const List = () => {
-    const classes = useStyles();
-
-    
-
-    return (
-        <>
-            <MaterialList className={classes.root}>
-              { createItems() }
-            </MaterialList>
-        </>
-    )
+  return (
+      <>
+          <MaterialList className={classes.root}>
+            { createItems() }
+          </MaterialList>
+      </>
+  )
 }
 
 export default List;
