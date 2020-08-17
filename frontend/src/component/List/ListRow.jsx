@@ -10,7 +10,7 @@ const ListRow = ({item, isUnderLine}) => {
         
         <>
               <ListItem alignItems="flex-start">
-                  <ListItemText primary={item.itemName} secondary={
+                  <ListItemText primary={item.dirName} secondary={
                       <Typography
                           component="span"
                           variant="body2"

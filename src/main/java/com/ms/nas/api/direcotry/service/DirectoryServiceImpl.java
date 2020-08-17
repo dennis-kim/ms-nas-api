@@ -133,18 +133,16 @@ public class DirectoryServiceImpl implements DirectoryService {
     private List<DirectoryVO> getChild(File file, int depth) {
         List<DirectoryVO> childVO = new ArrayList<>();
 
-        if(file.isDirectory()) {
-            for(File child : file.listFiles()) {
-                if(this.isTargetDirectory(child.getName())) {
-                    DirectoryVO vo = new DirectoryVO();
-                    vo.setDirName(child.getName());
-                    vo.setDirPath(child.getPath());
-                    vo.setUpdateDate(getUpdateDate(child.lastModified()));
-                    vo.setDepth(depth);
-                    vo.setChild(this.getChild(child, (depth + 1)));
-                    Collections.sort(vo.getChild(), new SortNameComparator());
-                    childVO.add(vo);
-                }
+        for(File child : file.listFiles()) {
+            if(child.isDirectory() && this.isTargetDirectory(child.getName())) {
+                DirectoryVO vo = new DirectoryVO();
+                vo.setDirName(child.getName());
+                vo.setDirPath(child.getPath());
+                vo.setUpdateDate(getUpdateDate(child.lastModified()));
+                vo.setDepth(depth);
+                vo.setChild(this.getChild(child, (depth + 1)));
+                Collections.sort(vo.getChild(), new SortNameComparator());
+                childVO.add(vo);
             }
         }
         Collections.sort(childVO, new SortNameComparator());

@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
 import api from '../../api/directoryApi';
 import Axios from 'axios';
-import { useState } from 'react';
+import {  } from 'react';
 
 const Tree = () => {
     const [data, setData] = useState([]);
@@ -24,7 +24,6 @@ const Tree = () => {
                 'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
             }
         }
-        const data = '';
 
         Axios.get("/directories")
         .then(response => {
