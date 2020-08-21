@@ -3,9 +3,7 @@ import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import api from '../../api/directoryApi';
-import Axios from 'axios';
-import {  } from 'react';
+import api from '../../api';
 
 const Tree = () => {
     const [data, setData] = useState([]);
@@ -13,27 +11,18 @@ const Tree = () => {
     let nodeId = 0;
 
     useEffect( () => {
-        getDirectories();
+        api.getDirectories()
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+            .finally(function () {
+                console.log("finally");
+            })
+
     }, [])
-
-    const getDirectories = () => {
-        const config = {
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
-            }
-        }
-
-        Axios.get("/directories")
-        .then(response => {
-            // response.status 200
-            setData(response.data)
-        })
-        .catch(error => {
-            console.log(error);
-        })
-    }
 
     const createItem = (contents) => {
         return (
