@@ -4,7 +4,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
-
 const ListRow = ({item, isUnderLine}) => {
     return(
         
@@ -17,7 +16,15 @@ const ListRow = ({item, isUnderLine}) => {
                           // className={classes.inline}
                           color="textPrimary"
                       >
+                          {
+                            item.dirPath
+                            .replace("d:\\directory\\", "")
+                            .replace("\\volume1\\", "")
+                            .replace("\\volume2\\", "")
+                          }
+                          <br></br>
                           {item.updateDate}
+
                       </Typography>
                   }
                   />
