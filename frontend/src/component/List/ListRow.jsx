@@ -21,6 +21,8 @@ const ListRow = ({item, isUnderLine}) => {
                             .replace("d:\\directory\\", "")
                             .replace("\\volume1\\", "")
                             .replace("\\volume2\\", "")
+                            .replace("/volume1/", "")
+                            .replace("/volume2/", "")
                           }
                           <br></br>
                           {item.updateDate}
