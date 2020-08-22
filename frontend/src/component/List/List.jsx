@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 const List = ( { contentsData } ) => {
   const classes = useStyles();
 
-  console.log(contentsData);
     
   const createItems = () => {
     return(
