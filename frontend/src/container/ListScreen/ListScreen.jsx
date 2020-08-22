@@ -1,11 +1,11 @@
 import React from 'react';
 import List from '../../component/List/List';
 
-export default function ListScreen() {
+export default function ListScreen( { contentsData } ) {
 
     return (
         <>
-            <List />
+            <List contentsData={contentsData} />
         </>
     )
 }
