@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import MaterialList from "@material-ui/core/List";
 import ListItem from './ListRow';
-import Axios from 'axios';
+import api from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -21,28 +21,17 @@ const List = () => {
   const [data, setData] = useState([]);
 
   useEffect( () => {
-      getContents();
+      api.getContents()
+            .then((response) => {
+                setData(response.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
+            .finally(function () {
+                console.log("finally");
+            })
     }, [])  
-    
-  const getContents = () => {
-    const config = {
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
-        }
-    }
-
-    Axios.get("/contents")
-    .then(response => {
-        // response.status 200
-        setData(response.data)
-    })
-    .catch(error => {
-        console.log(error);
-    })
-  }
-    
     
   const createItems = () => {
     return(
