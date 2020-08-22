@@ -2,11 +2,11 @@ import React from 'react';
 
 import Tree from '../../component/Tree/Tree';
 
-export default function TreeListScreen() {
+export default function TreeListScreen( { treeData } ) {
     return (
         <div style={{ padding: '10px' }}>
             
-            <Tree />
+            <Tree treeData={treeData}/>
         </div>
     )
 }

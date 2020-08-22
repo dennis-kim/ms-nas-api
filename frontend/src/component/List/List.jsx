@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import MaterialList from "@material-ui/core/List";
 import ListItem from './ListRow';
-import api from '../../api';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,26 +15,14 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-const List = () => {
+const List = ( { contentsData } ) => {
   const classes = useStyles();
-  const [data, setData] = useState([]);
 
-  useEffect( () => {
-      api.getContents()
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            })
-            .finally(function () {
-                console.log("finally");
-            })
-    }, [])  
+  console.log(contentsData);
     
   const createItems = () => {
     return(
-      data.map(
+      contentsData.map(
         (item, i) =>  <ListItem key={i} item={item} isUnderLine={true}/>
       )
     )
@@ -44,7 +31,7 @@ const List = () => {
   return (
       <>
           <MaterialList className={classes.root}>
-            { createItems() }
+            { contentsData ? createItems() : <></> }
           </MaterialList>
       </>
   )

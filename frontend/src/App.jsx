@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchScreen from './container/SearchScreen/SearchScreen';
 import List from './container/ListScreen/ListScreen';
 import Tree from './container/TreeListScreen/TreeListScreen';
+import api from './api';
 
 function App() {
   const [action, setAction] = useState('update');
   const [actionName, setActionName] = useState('업데이트');
   const [searchWord, setSearchWord] = useState('');
+  const [tree, setTree] = useState([]);
+  const [contents, setContents] = useState([]);
 
+
+  useEffect( () => {
+    api.getDirectories()
+        .then((response) => {
+          setTree(response.data);
+        })
+        .catch((e) => {
+        })
+        .finally(function () {
+        })
+  }, [])
+
+  useEffect( () => {
+    api.getContents()
+          .then((response) => {
+            setContents(response.data);
+          })
+          .catch((e) => {
+          })
+          .finally(function () {
+          })
+  }, [])  
 
   // Listner
   const handlerListClick = () => {
@@ -32,10 +57,10 @@ function App() {
   const switchScreen = () => {
     switch (action) {
       case 'update':
-        return <Tree />
+        return <Tree treeData={tree} />
     
       default:
-        return <List />
+        return <List contentsData={contents}/>
     }
   }
   return (

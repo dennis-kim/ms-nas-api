@@ -1,28 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import TreeItem from '@material-ui/lab/TreeItem';
-import api from '../../api';
 
-const Tree = () => {
-    const [data, setData] = useState([]);
+const Tree = ( { treeData } ) => {
 
     let nodeId = 0;
-
-    useEffect( () => {
-        api.getDirectories()
-            .then((response) => {
-                setData(response.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            })
-            .finally(function () {
-                console.log("finally");
-            })
-
-    }, [])
 
     const createItem = (contents) => {
         return (
@@ -62,7 +46,7 @@ const Tree = () => {
 
     return (
         <>
-            { data.map((item) => createItem(item)) }
+            { treeData.map((item) => createItem(item)) }
         </>
     )
 
